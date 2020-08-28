@@ -1,3 +1,52 @@
-# TODO Repository Name
+# Downstream Test V1
 
-_TODO(leads): please fill in this section_
+This action allows you to target a downstream repository to upgrade with the
+version of the upstream repository and then run the unit tests.
+
+This action assumes go modules and repo setup is similar to Knative and that
+environmental setup has already been performed.
+
+## Usage
+
+```yaml
+- uses: knative-sandbox/downstream-test-go@v1
+  with:
+    # Upstream Repository. For example, knative/pkk
+    # Default: ${{ github.repository }}
+    upstream-repository: ''
+
+    # The branch, tag or SHA to checkout for upstream-repository.
+    # Defaults are the same as actions/checkout@v2.ref.
+    upstream-ref: ''
+
+    # Upstream Module. For example, knative.dev/pkg
+    # Requried.
+    upstream-module: ''
+
+    # Downstream Repository. For example, knative-sandbox/sample-controller
+    # Requried.
+    downstream-repository: ''
+    
+    # The branch, tag or SHA to checkout for downstream-repository.
+    # Defaults are the same as actions/checkout@v2.ref.
+    downstream-ref: ''
+
+    # Downstream Module. For example, knative.dev/sample-controller
+    # Requried.
+    downstream-module: ''
+```
+
+## Scenarios
+
+### Test knative.dev/pkg changes are accepted by knative.dev/sample-controller
+
+
+```yaml
+- uses: knative-sandbox/downstream-test-go@v1
+  with:
+    upstream-module: 'knative.dev/pkg'
+    downstream-repository: 'knative-sandbox/sample-controller'
+    downstream-module: 'knative.dev/sample-controller'
+```
+
+
