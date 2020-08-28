@@ -26,7 +26,7 @@ inputs:
 
 runs:
   using: "composite"
-  steps: 
+  steps:
     - name: Checkout Upstream
       uses: actions/checkout@v2
       with:
