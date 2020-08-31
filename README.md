@@ -11,7 +11,7 @@ environmental setup has already been performed.
 ```yaml
 - uses: knative-sandbox/downstream-test-go@v1
   with:
-    # Upstream Repository. For example, knative/pkk
+    # Upstream Repository. For example, knative/pkg
     # Default: ${{ github.repository }}
     upstream-repository: ""
 
