@@ -1,25 +1,10 @@
 name: 'downstream-test-go'
 description: 'Test Downstream Go Modules with Upstream Go Modules.'
 inputs:
-  upstream-repository:
-    description: 'Upstream Repository. For example, knative/pkg'
-    required: false
-    default: '${{ github.repository }}'
-  upstream-ref:
-    description: >
-      The branch, tag or SHA to checkout for upstream-repository.
-      Defaults are the same as actions/checkout@v2.ref.
   upstream-module:
     description: 'Upstream Module. For example, knative.dev/pkg'
     required: true
 
-  downstream-repository:
-    description: 'Downstream Repository. For example, knative-sandbox/sample-controller'
-    required: true
-  downstream-ref:
-    description: >
-      The branch, tag or SHA to checkout for downstream-repository.
-      Defaults are the same as actions/checkout@v2.ref.
   downstream-module:
     description: 'Downstream Module. For example, knative.dev/sample-controller'
     required: true
@@ -27,19 +12,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout Upstream
-      uses: actions/checkout@v2
-      with:
-        repository: ${{ inputs.upstream-repository }}
-        path: './src/${{ inputs.upstream-module }}'
-        ref: ${{ inputs.upstream-ref }}
-
-    - name: Checkout Downstream
-      uses: actions/checkout@v2
-      with:
-        repository: ${{ inputs.downstream-repository }}
-        path: './src/${{ inputs.downstream-module }}'
-        ref: ${{ inputs.downstream-ref }}
 
     - name: Update Downstream, Replace Upstream with Local Upstream
       shell: bash
