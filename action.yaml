@@ -37,6 +37,7 @@ runs:
     - name: Build
       shell: bash
       run: |
+        pushd ./src/${{ inputs.downstream-module }}
         tags="$(grep -I  -r '// +build' . |
                 grep -v '^./vendor/' | \
                 grep -v '^./hack/' | \
@@ -47,6 +48,7 @@ runs:
                 tr '\n' ' ')"
         echo "Building with tags: ${tags}"
         go test -vet=off -tags "${tags}" -run=^$ ./...
+        popd
 
     - name: Test Downstream
       shell: bash
