@@ -47,7 +47,7 @@ runs:
                 grep -v '^!' | \
                 tr '\n' ' ')"
         echo "Building with tags: ${tags}"
-        go test -vet=off -tags "${tags}" -run=^$ ./...
+        go test -vet=off -tags "${tags}" -exec echo ./...
         popd
 
     - name: Test Downstream
