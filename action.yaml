@@ -45,6 +45,8 @@ runs:
                 cut -f3 -d' ' | \
                 sort | uniq | \
                 grep -v '^!' | \
+                `# Don't pass any of the built-in GOOS tags` \
+                grep -vE '(windows|linux|darwin)' | \
                 tr '\n' ' ')"
         echo "Building with tags: ${tags}"
         go test -vet=off -tags "${tags}" -exec echo ./...
